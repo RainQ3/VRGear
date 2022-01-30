@@ -1,0 +1,72 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="300"
+             MinHeight="300"
+             x:Class="LogViewer.Views.UserView">
+
+    <Border Padding="20"
+            Margin="10"
+            Background="#202020"
+            CornerRadius="30">
+        <Grid ColumnDefinitions="*" RowDefinitions="* * * *">
+            <Border Grid.Column="0" Grid.Row="0"
+                    Background="#404040"
+                    CornerRadius="15"
+                    VerticalAlignment="Center">
+                <Grid ColumnDefinitions="Auto *" RowDefinitions="Auto">
+                    <PathIcon Grid.Column="0" Grid.Row="0"
+                              Height="40" Width="40"
+                              Data="{StaticResource UserNameIcon}"
+                              Margin="10 5" />
+                    <TextBlock Grid.Column="1" Grid.Row="0"
+                               Text="UserName"
+                               VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="1"
+                    Background="#404040"
+                    CornerRadius="15"
+                    VerticalAlignment="Center">
+                <Grid ColumnDefinitions="Auto *" RowDefinitions="Auto">
+                    <PathIcon Grid.Column="0" Grid.Row="0"
+                              Height="40" Width="40"
+                              Data="{StaticResource FingerPrintIcon}"
+                              Margin="10 5" />
+                    <TextBlock Grid.Column="1" Grid.Row="0"
+                               Text="User ID"
+                               VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="2"
+                    Background="#404040"
+                    CornerRadius="15"
+                    VerticalAlignment="Center">
+                <Grid ColumnDefinitions="Auto *" RowDefinitions="Auto">
+                    <PathIcon Grid.Column="0" Grid.Row="0"
+                              Height="40" Width="40"
+                              Data="{StaticResource AvatarIcon}"
+                              Margin="10 5" />
+                    <TextBlock Grid.Column="1" Grid.Row="0"
+                               Text="Avatar ID"
+                               VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="3"
+                    Background="#404040"
+                    CornerRadius="15"
+                    VerticalAlignment="Center">
+                <Grid ColumnDefinitions="Auto *" RowDefinitions="Auto">
+                    <PathIcon Grid.Column="0" Grid.Row="0"
+                              Height="40" Width="40"
+                              Data="{StaticResource DateTimeIcon}"
+                              Margin="10 5" />
+                    <TextBlock Grid.Column="1" Grid.Row="0"
+                               Text="DateTime"
+                               VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,48 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Installer.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="450"
+        Width="450" Height="450"
+        x:Class="Installer.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="VRGear Installer">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <ScrollViewer>
+        <Border Margin="10" VerticalAlignment="Center">
+            <Grid RowDefinitions="Auto Auto Auto Auto" ColumnDefinitions="*">
+                <PathIcon Grid.Row="0" Grid.Column="0"
+                          Height="200" Width="200"
+                          Data="{StaticResource GearIcon}" />
+                <TextBox Grid.Row="1" Grid.Column="0"
+                         Margin="0 20"
+                         CornerRadius="10"
+                         IsReadOnly="True"
+                         Watermark="Select VRChat executable to install" />
+                <Button Grid.Row="2" Grid.Column="0"
+                        CornerRadius="10"
+                        Margin="0 0 0 5"
+                        Height="50"
+                        HorizontalAlignment="Stretch">
+                    <TextBlock Text="Select VRChat executable"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center" />
+                </Button>
+                <Button Grid.Row="3" Grid.Column="0"
+                        CornerRadius="10"
+                        Margin="0 5 0 0"
+                        Height="50"
+                        HorizontalAlignment="Stretch">
+                    <TextBlock Text="Install VRGear"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center" />
+                </Button>
+            </Grid>
+        </Border>
+    </ScrollViewer>
+</Window>
