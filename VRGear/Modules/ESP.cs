@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using VRGear.Utils;
+using Logger = VRGear.Utils.Logger;
 using Player = VRC.Player;
 
 namespace VRGear.Modules
@@ -86,6 +87,8 @@ namespace VRGear.Modules
             if (!Input.GetKey(_model.Modifier) || !Input.GetKeyDown(_model.Code)) return;
 
             _state = _state == Enum.GetValues(typeof(Model.EspState)).Cast<Model.EspState>().Last() ? 0 : _state + 1;
+            Logger.Instance.Log($"State changed to: {_state.ToString()}",
+                _state == Model.EspState.None ? ConsoleColor.Green : ConsoleColor.Yellow);
 
             Cache();
         }

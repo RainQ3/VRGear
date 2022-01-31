@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Logger = VRGear.Utils.Logger;
 
 namespace VRGear.Modules
 {
@@ -6,7 +7,9 @@ namespace VRGear.Modules
     {
         public UnlimitedFps()
         {
-            Application.targetFrameRate = 300;
+            const int frameRate = 300;
+            Application.targetFrameRate = frameRate;
+            Logger.Instance.Log($"Application max frame rate set to {frameRate}");
         }
     }
 }

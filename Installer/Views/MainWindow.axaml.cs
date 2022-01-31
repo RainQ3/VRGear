@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Installer.ViewModels;
 
 namespace Installer.Views
 {
@@ -17,6 +18,7 @@ namespace Installer.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            DataContext = new MainWindowViewModel(this);
         }
     }
 }

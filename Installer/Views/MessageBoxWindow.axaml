@@ -1,0 +1,46 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:Installer.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
+        Width="400" Height="300"
+        x:Class="Installer.Views.MessageBoxWindow"
+        WindowStartupLocation="CenterScreen"
+        Title="{Binding Title}">
+
+    <Design.DataContext>
+        <viewModels:MessageBoxViewModel />
+    </Design.DataContext>
+
+    <Border Padding="20 10">
+        <Grid RowDefinitions="Auto * Auto" ColumnDefinitions="*">
+            <Border Grid.Row="0" Grid.Column="0"
+                    CornerRadius="8"
+                    Background="#3C3C3C"
+                    Margin="0 0 0 10">
+                <TextBlock
+                    Text="{Binding Title}"
+                    Margin="10"
+                    TextAlignment="Center"
+                    VerticalAlignment="Center" />
+            </Border>
+
+            <TextBox Grid.Row="1"
+                     CornerRadius="10"
+                     IsReadOnly="True"
+                     Text="{Binding ErrorText}" />
+
+            <Button Grid.Row="2"
+                    CornerRadius="10"
+                    Padding="8"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch"
+                    Margin="0 10 0 0"
+                    Command="{Binding OkayCommand}">
+                <TextBlock Text="OK"
+                           TextAlignment="Center" />
+            </Button>
+        </Grid>
+    </Border>
+</Window>

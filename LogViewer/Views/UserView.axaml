@@ -7,7 +7,7 @@
              x:Class="LogViewer.Views.UserView">
 
     <Border Padding="20"
-            Margin="10"
+            Margin="0 0 0 10"
             Background="#202020"
             CornerRadius="30">
         <Grid ColumnDefinitions="*" RowDefinitions="* * * *">

@@ -7,16 +7,22 @@
         mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="800"
         Width="500" Height="800"
         x:Class="LogViewer.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="LogViewer">
+        Icon="/Assets/AppLogo.png"
+        Title="VRGear LogViewer">
 
     <Design.DataContext>
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <Grid RowDefinitions="Auto *" ColumnDefinitions="*">
-        <Button Grid.Row="0" Grid.Column="0"
-                Margin="10 10 10 5"
+    <Grid RowDefinitions="Auto Auto *">
+        <TextBox Grid.Row="0"
+                 Margin="10"
+                 IsReadOnly="True"
+                 CornerRadius="8"
+                 Watermark="Loaded log path will show here" />
+
+        <Button Grid.Row="1"
+                Margin="10 5 10 10"
                 Padding="0 10"
                 CornerRadius="10"
                 HorizontalAlignment="Stretch">
@@ -24,7 +30,8 @@
                        Text="Load log"
                        FontSize="20" />
         </Button>
-        <ScrollViewer Grid.Row="1" Grid.Column="0"
+
+        <ScrollViewer Grid.Row="2" Grid.Column="0"
                       Margin="10 5 10 10"
                       CornerRadius="20">
             <StackPanel>

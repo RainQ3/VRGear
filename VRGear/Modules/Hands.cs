@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using VRGear.Utils;
 using RootMotion.FinalIK;
+using Logger = VRGear.Utils.Logger;
 
 namespace VRGear.Modules
 {
@@ -25,6 +26,8 @@ namespace VRGear.Modules
             {
                 _controller = Player.CurrentPlayer.GetComponentInChildren<VRIK>();
                 _state = _state == Enum.GetValues(typeof(Model.HandState)).Cast<Model.HandState>().Last() ? 0 : _state + 1;
+                Logger.Instance.Log($"State changed to: {_state.ToString()}",
+                    _state == Model.HandState.None ? ConsoleColor.Green : ConsoleColor.Yellow);
             }
 
             if (_controller == null) return;

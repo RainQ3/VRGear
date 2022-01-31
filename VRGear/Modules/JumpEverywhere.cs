@@ -20,6 +20,8 @@ namespace VRGear.Modules
             if (player != Utils.Player.CurrentPlayer.prop_Player_0 ||
                 Utils.Player.CurrentPlayer.GetComponent<PlayerModComponentJump>() != null) return;
 
+            Logger.Instance.Log("Activated", ConsoleColor.Yellow);
+            
             var jumpComponent = Utils.Player.CurrentPlayer.gameObject.AddComponent<PlayerModComponentJump>();
             jumpComponent.field_Private_Single_0 = _model.Height;
             jumpComponent.field_Private_Single_1 = _model.Height;

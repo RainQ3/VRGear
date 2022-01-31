@@ -3,10 +3,11 @@
         xmlns:vm="using:Installer.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="450"
-        Width="450" Height="450"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="460"
+        Width="450" Height="460"
         x:Class="Installer.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/AppLogo.png"
+        WindowStartupLocation="CenterScreen"
         Title="VRGear Installer">
 
     <Design.DataContext>
@@ -15,16 +16,18 @@
 
     <ScrollViewer>
         <Border Margin="10" VerticalAlignment="Center">
-            <Grid RowDefinitions="Auto Auto Auto Auto" ColumnDefinitions="*">
+            <Grid RowDefinitions="Auto Auto Auto Auto Auto" ColumnDefinitions="*">
                 <PathIcon Grid.Row="0" Grid.Column="0"
                           Height="200" Width="200"
                           Data="{StaticResource GearIcon}" />
                 <TextBox Grid.Row="1" Grid.Column="0"
-                         Margin="0 20"
+                         Margin="0 20 0 10"
                          CornerRadius="10"
                          IsReadOnly="True"
+                         Text="{Binding AppPath}"
                          Watermark="Select VRChat executable to install" />
                 <Button Grid.Row="2" Grid.Column="0"
+                        Command="{Binding SelectExe}"
                         CornerRadius="10"
                         Margin="0 0 0 5"
                         Height="50"
@@ -34,11 +37,22 @@
                                TextAlignment="Center" />
                 </Button>
                 <Button Grid.Row="3" Grid.Column="0"
+                        Command="{Binding InstallMod}"
                         CornerRadius="10"
-                        Margin="0 5 0 0"
+                        Margin="0 0 0 5"
                         Height="50"
                         HorizontalAlignment="Stretch">
                     <TextBlock Text="Install VRGear"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center" />
+                </Button>
+                <Button Grid.Row="4" Grid.Column="0"
+                        Command="{Binding InstallPlugin}"
+                        CornerRadius="10"
+                        Margin="0 0 0 5"
+                        Height="50"
+                        HorizontalAlignment="Stretch">
+                    <TextBlock Text="Install auto updater"
                                VerticalAlignment="Center"
                                TextAlignment="Center" />
                 </Button>
