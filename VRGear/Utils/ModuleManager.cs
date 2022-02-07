@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using ExitGames.Client.Photon;
+using Photon.Realtime;
 using VRGear.Attributes;
 
 namespace VRGear.Utils
@@ -76,6 +78,21 @@ namespace VRGear.Utils
             }
         }
 
+        public void OnEvent(EventData eventData)
+        {
+            for (var i = 0; i < _modules.Count; i++)
+            {
+                try
+                {
+                    _modules[i].OnEvent(eventData);
+                }
+                catch (Exception exception)
+                {
+                    Logger.Instance.Error($"Error while handling module {_modules[i].GetType().Name}: {exception}");
+                }
+            }
+        }
+        
         public void Save()
         {
             for (var i = 0; i < _modules.Count; i++)
@@ -128,6 +145,21 @@ namespace VRGear.Utils
                 try
                 {
                     _modules[i].PlayerLeft(player);
+                }
+                catch (Exception exception)
+                {
+                    Logger.Instance.Error($"Error while handling module {_modules[i].GetType().Name}: {exception}");
+                }
+            }
+        }
+        
+        public void Quit()
+        {
+            for (var i = 0; i < _modules.Count; i++)
+            {
+                try
+                {
+                    _modules[i].Quit();
                 }
                 catch (Exception exception)
                 {

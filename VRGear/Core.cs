@@ -15,11 +15,23 @@ namespace VRGear
     {
         private ModuleManager _moduleManager;
 
+        private void ApplyPatches()
+        {
+            Patches.PhotonNetworkEvent.OnEnvent += _moduleManager.OnEvent;
+        }
+        
+        private void RemovePatches()
+        {
+            Patches.PhotonNetworkEvent.OnEnvent -= _moduleManager.OnEvent;
+        }
+        
         public override void OnApplicationStart()
         {
             _moduleManager = new ModuleManager();
             MelonCoroutines.Start(WaitForUiInit());
             MelonCoroutines.Start(NetworkInit());
+            
+            ApplyPatches();
         }
         
         private IEnumerator WaitForUiInit()
@@ -55,5 +67,11 @@ namespace VRGear
         public override void OnLateUpdate() => _moduleManager.LateUpdate();
         public override void OnPreferencesSaved() => _moduleManager.Save();
         public override void OnPreferencesLoaded() => _moduleManager.Load();
+
+        public override void OnApplicationQuit()
+        {
+            RemovePatches();
+            _moduleManager.Quit();
+        }
     }
 }

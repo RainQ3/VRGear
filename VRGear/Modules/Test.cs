@@ -1,25 +1,24 @@
-﻿using VRGear.Attributes;
-using VRGear.Utils;
+﻿using ExitGames.Client.Photon;
+using MelonLoader;
+using VRGear.Attributes;
 
 namespace VRGear.Modules
 {
     [DontLoad]
-    [LoadOrder(2)]
     public class Test : Module
     {
-        public Test()
+        public override void OnEvent(EventData eventData)
         {
-            Logger.Instance.Log("Ctor");
-        }
+            if (eventData.sender != 0)
+                MelonLogger.Msg($"OnEvent! [Sender: {eventData.Sender}, " +
+                                    $"byte code: {eventData.Code}, " +
+                                    $"SenderKey: {eventData.SenderKey}, " +
+                                    $"CustomDataKey: {eventData.CustomDataKey}]");
 
-        public override void UiInit()
-        {
-            Logger.Instance.Log("UiInit");
-        }
-
-        public override void Update()
-        {
-            Logger.Instance.Log("Update");
+            // foreach (var parameter in eventData.Parameters)
+            // {
+                // Logger.Instance.Log($"With Parameter: {parameter.Key}, {parameter.Value}");
+            // }
         }
     }
 }

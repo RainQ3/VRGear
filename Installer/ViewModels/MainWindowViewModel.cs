@@ -33,7 +33,8 @@ namespace Installer.ViewModels
                     Directory.CreateDirectory(modsFolderPath);
 
                 var webClient = new WebClient();
-                webClient.DownloadFileAsync(new Uri(""), Path.Combine(modsFolderPath, "VRGear.dll"));
+                webClient.DownloadFileAsync(new Uri("https://github.com/PureFoxCore/VRGear/releases/latest/download/VRGear.dll"),
+                    Path.Combine(modsFolderPath, "VRGear.dll"));
             });
 
             InstallPlugin = ReactiveCommand.Create(() =>
@@ -50,7 +51,8 @@ namespace Installer.ViewModels
                     Directory.CreateDirectory(pluginsFolderPath);
 
                 var webClient = new WebClient();
-                webClient.DownloadFileAsync(new Uri(""), Path.Combine(pluginsFolderPath, "VRGearUpdater.dll"));
+                webClient.DownloadFileAsync(new Uri("https://github.com/PureFoxCore/VRGear/releases/latest/download/VRGearUpdater.dll"),
+                    Path.Combine(pluginsFolderPath, "VRGearUpdater.dll"));
             });
         }
 
@@ -62,7 +64,10 @@ namespace Installer.ViewModels
                 AllowMultiple = false,
                 Title = "Select VRChat exe"
             };
+
             string? selectedFile = (await fileDialog.ShowAsync(_window!))?[0];
+
+            if (selectedFile == null) return;
 
             if (selectedFile!.ToLower().EndsWith("VRChat.exe".ToLower()) == false)
             {

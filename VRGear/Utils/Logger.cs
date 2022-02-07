@@ -1,6 +1,10 @@
 ﻿using System;
 using MelonLoader;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using VRGear.Attributes;
+using VRGear.Attributes.Log;
 
 namespace VRGear.Utils
 {
@@ -8,11 +12,18 @@ namespace VRGear.Utils
     {
         private static Logger _instance;
         private readonly MelonLogger.Instance _logger;
+        private readonly bool _isPriorityMode;
 
         private Logger()
         {
             _logger = new MelonLogger.Instance(nameof(VRGear), ConsoleColor.White);
             Console.Title = $"{nameof(VRGear)} by Rai#3279";
+
+            _isPriorityMode = Assembly
+                .GetExecutingAssembly()
+                .GetTypes()
+                .Where(type => type.IsClass)
+                .Any(type => Attribute.IsDefined(type, typeof(PriorityLogAttribute)));
         }
 
         public static Logger Instance => _instance ??= new Logger();
@@ -21,36 +32,36 @@ namespace VRGear.Utils
         {
             try
             {
-                _logger.Msg(color, $"[{new StackTrace().GetFrames()?[1].GetMethod()?.DeclaringType?.Name}] {message}");
+                var stackFrame = new StackTrace().GetFrames()?[1];
+                var declaringType = stackFrame?.GetMethod()?.DeclaringType;
+
+                if (Attribute.IsDefined(declaringType?.GetType()!, typeof(IgnoreLogAttribute)))
+                    return;
+
+                if (_isPriorityMode)
+                {
+                    if (Attribute.IsDefined(declaringType?.GetType()!, typeof(PriorityLogAttribute)))
+                        _logger.Msg(color, declaringType?.Name);
+
+                    return;
+                }
+
+                _logger.Msg(color, $"[{declaringType?.Name}] {message}");
             }
             catch (Exception exception)
             {
-                Error($"Error while logging: {exception}");
+                _logger.Msg($"Error while logging: {exception}");
             }
         }
 
         public void Warn(object message)
         {
-            try
-            {
-                _logger.Msg(ConsoleColor.Yellow, $"[{new StackTrace().GetFrames()?[1].GetMethod()?.DeclaringType?.Name}] {message}");
-            }
-            catch (Exception exception)
-            {
-                Error($"Error while logging: {exception}");
-            }
+            Log(message, ConsoleColor.Yellow);
         }
 
         public void Error(object message)
         {
-            try
-            {
-                _logger.Msg(ConsoleColor.Red, $"[{new StackTrace().GetFrames()?[1].GetMethod()?.DeclaringType?.Name}] {message}");
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine($"Error while handling error: {exception}");
-            }
+            Log(message, ConsoleColor.Red);
         }
     }
 }
